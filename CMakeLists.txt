@@ -1,6 +1,8 @@
 cmake_minimum_required(VERSION 3.0)
 project(Glitter)
 
+set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
+
 option(GLFW_BUILD_DOCS OFF)
 option(GLFW_BUILD_EXAMPLES OFF)
 option(GLFW_BUILD_TESTS OFF)
@@ -27,7 +29,10 @@ else()
     endif()
 endif()
 
-include_directories(Glitter/Headers/
+include_directories(Glitter/
+                    Glitter/Game
+                    Glitter/System
+                    Glitter/View
                     Glitter/Vendor/assimp/include/
                     Glitter/Vendor/bullet/src/
                     Glitter/Vendor/glad/include/
@@ -36,8 +41,15 @@ include_directories(Glitter/Headers/
                     Glitter/Vendor/stb/)
 
 file(GLOB VENDORS_SOURCES Glitter/Vendor/glad/src/glad.c)
-file(GLOB PROJECT_HEADERS Glitter/Headers/*.hpp)
-file(GLOB PROJECT_SOURCES Glitter/Sources/*.cpp)
+file(GLOB PROJECT_HEADERS Glitter/*.hpp
+                          Glitter/Game/*.hpp
+                          Glitter/System/*.hpp
+                          Glitter/View/*.hpp
+                          )
+file(GLOB PROJECT_SOURCES Glitter/*.cpp
+                          Glitter/Game/*.cpp
+                          Glitter/System/*.cpp
+                          Glitter/View/*.cpp)
 file(GLOB PROJECT_SHADERS Glitter/Shaders/*.comp
                           Glitter/Shaders/*.frag
                           Glitter/Shaders/*.geom
